@@ -1,0 +1,7 @@
+{
+    "codeLens.enable": true,
+    "metals.showInferredType": true,
+    "metals.enableStripMarginOnTypeFormatting": true,
+    "metals.showImplicitConversionsAndClasses": true,
+    "metals.statusBarEnabled": true
+}
