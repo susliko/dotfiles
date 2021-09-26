@@ -58,6 +58,7 @@ Plug 's1n7ax/nvim-terminal'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'kristijanhusak/orgmode.nvim'
 Plug 'ellisonleao/glow.nvim'
+Plug 'tpope/vim-scriptease'
 call plug#end()
 
 " Esc remap
