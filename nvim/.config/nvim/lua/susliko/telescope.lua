@@ -3,34 +3,28 @@ local transform_mod = require('telescope.actions.mt').transform_mod
 
 local custom_actions = transform_mod({
   toggle_hidden = function(prompt_bufnr)
-    -- actions.close(prompt_bufnr)
     picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-    picker:refresh(require("telescope.finders").JobFinder:new({}), {})
+    picker:refresh(require("telescope.finders").JobFinder:new({}), {}) -- TODO
   end,
 })
 
-local foo = transform_mod({
-  bar = function(prompt_bufnr)
-    print("This function ran after another action. Prompt_bufnr: " .. prompt_bufnr)
-    actions.close(prompt_bufnr)
-    -- Enter your function logic here. You can take inspiration from lua/telescope/actions.lua
-  end,
-})
+local trim_path_vowels = function(opts, path)
+  local sep = require("telescope.utils").get_separator()
+  local filename = require("telescope.utils").path_tail(path)
+  local filepath = string.gsub(path, sep .. filename, "")
+  if  (filepath == filename) then
+    return filename
+  else 
+    local short_filepath = string.gsub(filepath, "[AEYUIOaeyuio]", "")
+    return string.format("%s/%s", short_filepath, filename)
+  end
+end
+
 
 require("telescope").setup({
     defaults = {
         file_ignore_patterns = {'.git/.*'},
-        path_display = function(opts, path)
-          local sep = require("telescope.utils").get_separator()
-          local filename = require("telescope.utils").path_tail(path)
-          local filepath = string.gsub(path, sep .. filename, "")
-          if  (filepath == filename) then
-            return filename
-          else 
-            local short_filepath = string.gsub(filepath, "[AEYUIOaeyuio]", "")
-            return string.format("%s/%s", short_filepath, filename)
-          end
-        end,
+        path_display = trim_path_vowels,
         file_sorter = require("telescope.sorters").get_fzy_sorter,
         prompt_prefix = " >",
         color_devicons = true,
@@ -64,6 +58,15 @@ M.search_dotfiles = function()
         cwd = vim.env.DOTFILES,
         hidden = true,
     })
+end
+
+M.lsp_workspace_symbols = function()
+  local input = vim.fn.input("Query: ")
+  vim.api.nvim_command("normal :esc<CR>")
+  if not input or #input == 0 then
+    return
+  end
+  require("telescope.builtin").lsp_workspace_symbols({ query = input })
 end
 
 return M

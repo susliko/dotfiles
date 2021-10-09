@@ -1,4 +1,3 @@
-" init.vim
 lua << EOF
 require('orgmode').setup({
   org_agenda_files = {'~/diary/*'},

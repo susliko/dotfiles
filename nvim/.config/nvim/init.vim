@@ -20,11 +20,16 @@ set nobackup " Some servers have issues with backup files
 set nowritebackup
 set updatetime=300 " You will have a bad experience with diagnostic messages with the default 4000.
 set shortmess+=c " Don't give |ins-completion-menu| messages.
+set shortmess-=F " Ensure autocmd works for Filetype
 set signcolumn=yes " Always show signcolumns
 set splitright
+set completeopt=menuone,noselect,noinsert
+set termguicolors " this variable must be enabled for colors to be applied properly
+
 highlight lCursor guifg=NONE guibg=Cyan
 
 call plug#begin('~/.vim/plugged')
+Plug 'neovim/nvim-lspconfig'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -34,7 +39,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'mechatroner/rainbow_csv'
 Plug 'florentc/vim-tla'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -59,6 +63,9 @@ Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'kristijanhusak/orgmode.nvim'
 Plug 'ellisonleao/glow.nvim'
 Plug 'tpope/vim-scriptease'
+Plug 'scalameta/nvim-metals'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/nvim-compe'
 call plug#end()
 
 " Esc remap
@@ -100,6 +107,9 @@ command WM :term curl wttr.in/moscow
 " highlight yanked
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 
+" no higlight
+nnoremap ,<space> :noh<CR>
+
 
 lua << EOF
 function _G.dump(...)
@@ -113,3 +123,16 @@ EOF
 let g:glow_binary_path = "/usr/local/bin"
 noremap <leader>mm :Glow<CR>
 
+" nvim-lsp Mappings
+nnoremap <silent> gd          <cmd>lua require('telescope.builtin').lsp_definitions()<CR>
+nnoremap <silent> gtd         <cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>
+nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gi          <cmd>lua require('telescope.builtin').lsp_implementations()<CR>
+nnoremap <silent> gr          <cmd>lua require('telescope.builtin').lsp_references()<CR>
+nnoremap <silent> gs         <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
+nnoremap <silent> gws         <cmd>lua require('susliko.telescope').lsp_workspace_symbols()<CR>
+nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>ca  <cmd>lua require('telescope.builtin').lsp_code_actions()<CR>
+nnoremap <silent> <leader>d   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> [c          <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
+nnoremap <silent> ]c          <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
