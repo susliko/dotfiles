@@ -1,0 +1,49 @@
+[theme]
+name = "solarized-dark"
+[theme.overrides]
+ idle_bg = "#88b090"
+ idle_fg = "#040404"
+ info_bg = "#2aa198"
+ info_fg = "#88b090"
+ good_bg = "#88b090"
+ good_fg = "#040404"
+ warning_bg = "#ccdc90"
+ warning_fg = "#88b090"
+ critical_bg = "#e89393"
+ critical_fg = "#88b090"
+
+[icons]
+name = "awesome"
+
+[[block]]
+block = "networkmanager"
+ap_format = "{ssid} {strength}"
+device_format = "{ap}"
+on_click = "alacritty -e nmtui"
+
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+interval = 10
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "custom"
+command = "xkblayout-state print %s"
+interval = 0.1
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"
+
+[[block]]
+block = "time"
+interval = 1
+format = "%a %d/%m %T"
+
