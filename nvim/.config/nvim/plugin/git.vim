@@ -8,6 +8,4 @@
 " nmap <leader>gf :diffget //2<CR>
 " nmap <leader>gg :G<CR>
 
-" lua require('gitsigns').setup()
-
-let g:fugitive_gitlab_domains = ['https://gitlab.tcsbank.ru']
+lua require('gitsigns').setup()
