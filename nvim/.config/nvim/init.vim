@@ -72,7 +72,7 @@ Plug 'vim-utils/vim-man'
 call plug#end()
 
 " Esc remap
-inoremap jk <Esc>
+" inoremap jk <Esc>
 
 " language switch
 inoremap <C-l> <C-^>
