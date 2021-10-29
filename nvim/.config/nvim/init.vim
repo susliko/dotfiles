@@ -30,13 +30,16 @@ set hid
 highlight lCursor guifg=NONE guibg=Cyan
 
 call plug#begin('~/.vim/plugged')
+Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'ellisonleao/glow.nvim'
 Plug 'florentc/vim-tla'
 Plug 'folke/lua-dev.nvim'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -56,7 +59,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug '~/programming/public/tla.nvim'
 Plug 'rmagatti/auto-session'
 Plug 's1n7ax/nvim-terminal'
 Plug 'scalameta/nvim-metals'
@@ -69,6 +71,7 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-utils/vim-man'
+Plug '~/programming/public/tla.nvim'
 call plug#end()
 
 " Esc remap
@@ -126,16 +129,3 @@ EOF
 let g:glow_binary_path = "/usr/local/bin"
 noremap <leader>mm :Glow<CR>
 
-" nvim-lsp Mappings
-nnoremap <silent> gd          <cmd>lua require('telescope.builtin').lsp_definitions()<CR>
-nnoremap <silent> gtd         <cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>
-nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gi          <cmd>lua require('telescope.builtin').lsp_implementations()<CR>
-nnoremap <silent> gr          <cmd>lua require('telescope.builtin').lsp_references()<CR>
-nnoremap <silent> gs         <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
-nnoremap <silent> gws         <cmd>lua require('susliko.telescope').lsp_workspace_symbols()<CR>
-nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>ca  <cmd>lua require('telescope.builtin').lsp_code_actions()<CR>
-nnoremap <silent> <leader>d   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <silent> [c          <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
-nnoremap <silent> ]c          <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
