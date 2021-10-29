@@ -18,3 +18,9 @@ nnoremap <silent> <leader>a   <cmd>lua require"metals".open_all_diagnostics()<CR
 nnoremap <silent> <leader>tt" <cmd>lua require("metals.tvp").toggle_tree_view()<CR>
 nnoremap <silent> <leader>tr" <cmd>lua require("metals.tvp").reveal_in_tree()<CR>
 nnoremap <silent> <leader>fm  <cmd>lua require("telescope").extensions.metals.commands()<CR>
+
+autocmd BufWritePre *.scala lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.html lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.css lua vim.lsp.buf.formatting()
+
