@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/bin
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/bin:$HOME/programming/public/lua-language-server/bin/macOS
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/v.morkovkin/.oh-my-zsh"
@@ -105,3 +105,5 @@ alias v="nvim"
 alias lzd='lazydocker'
 alias lg='lazygit'
 export DOTFILES="$HOME/.dotfiles/"
+
+alias luamake=/Users/v.morkovkin/programming/public/lua-language-server/3rd/luamake/luamake
