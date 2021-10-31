@@ -43,7 +43,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'kien/ctrlp.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'kristijanhusak/orgmode.nvim', { 'branch' : 'tree-sitter' }
@@ -61,6 +60,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'onsails/lspkind-nvim'
+Plug 'phaazon/hop.nvim'
 Plug 'rmagatti/auto-session'
 Plug 'scalameta/nvim-metals'
 Plug 'sheerun/vim-polyglot'
@@ -130,3 +130,7 @@ EOF
 let g:glow_binary_path = "/usr/local/bin"
 noremap <leader>mm :Glow<CR>
 
+" hop
+lua require'hop'.setup()
+nnoremap <silent>f :HopWord<CR>
+nnoremap <silent>s :HopChar2<CR>

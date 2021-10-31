@@ -13,11 +13,12 @@ nnoremap <silent> <leader>ca  <cmd>lua require('telescope.builtin').lsp_code_act
 nnoremap <silent> <leader>d   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> [c          <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
 nnoremap <silent> ]c          <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
-nnoremap <silent> <leader>ws  <cmd>lua require"metals".hover_worksheet()<CR>
-nnoremap <silent> <leader>a   <cmd>lua require"metals".open_all_diagnostics()<CR>
-nnoremap <silent> <leader>tt" <cmd>lua require("metals.tvp").toggle_tree_view()<CR>
-nnoremap <silent> <leader>tr" <cmd>lua require("metals.tvp").reveal_in_tree()<CR>
-nnoremap <silent> <leader>fm  <cmd>lua require("telescope").extensions.metals.commands()<CR>
+nnoremap <silent> <leader>ws  <cmd>lua require('metals'.hover_worksheet()<CR>
+nnoremap <silent> <leader>a   <cmd>lua require('metals').open_all_diagnostics()<CR>
+nnoremap <silent> <leader>tt" <cmd>lua require('metals.tvp').toggle_tree_view()<CR>
+nnoremap <silent> <leader>tr" <cmd>lua require('metals.tvp').reveal_in_tree()<CR>
+nnoremap <silent> <leader>fm  <cmd>lua require('telescope').extensions.metals.commands()<CR>
+nnoremap <silent> <leader>ml  <cmd>lua require('metals').toggle_logs()<CR>
 
 autocmd BufWritePre *.scala lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting()
