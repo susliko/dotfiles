@@ -71,6 +71,7 @@ M.setup = function()
   lsp_config.dockerls.setup({})
   lsp_config.html.setup({})
   lsp_config.cssls.setup({})
+  lsp_config.jdtls.setup({})
   lsp_config.jsonls.setup({
     commands = {
       Format = {
@@ -82,8 +83,9 @@ M.setup = function()
   })
   lsp_config.tsserver.setup({})
 
+  require("lsp_signature").setup({hint_enable = false})
   -- Uncomment for trace logs from neovim
-  vim.lsp.set_log_level('trace')
+  -- vim.lsp.set_log_level('trace')
 end
 
 return M

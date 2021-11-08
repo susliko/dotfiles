@@ -41,9 +41,6 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'kien/ctrlp.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'kristijanhusak/orgmode.nvim', { 'branch' : 'tree-sitter' }
 Plug 'kristijanhusak/vim-dadbod-ui'
@@ -61,6 +58,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'phaazon/hop.nvim'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'rmagatti/auto-session'
 Plug 'scalameta/nvim-metals'
 Plug 'sheerun/vim-polyglot'
@@ -132,5 +130,4 @@ noremap <leader>mm :Glow<CR>
 
 " hop
 lua require'hop'.setup()
-nnoremap <silent>f :HopWord<CR>
-nnoremap <silent>s :HopChar2<CR>
+nnoremap s :HopChar1<CR>
