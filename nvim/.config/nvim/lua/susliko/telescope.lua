@@ -1,25 +1,16 @@
 local actions = require("telescope.actions")
-local transform_mod = require('telescope.actions.mt').transform_mod
 
-local custom_actions = transform_mod({
-  toggle_hidden = function(prompt_bufnr)
-    picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-    picker:refresh(require("telescope.finders").JobFinder:new({}), {}) -- TODO
-  end,
-})
-
-local trim_path_vowels = function(opts, path)
+local trim_path_vowels = function(_, path)
   local sep = require("telescope.utils").get_separator()
   local filename = require("telescope.utils").path_tail(path)
   local filepath = string.gsub(path, sep .. filename, "")
-  if  (filepath == filename) then
+  if (filepath == filename) then
     return filename
-  else 
+  else
     local short_filepath = string.gsub(filepath, "[AEYUIOaeyuio]", "")
     return string.format("%s/%s", short_filepath, filename)
   end
 end
-
 
 require("telescope").setup({
     defaults = {
@@ -29,20 +20,26 @@ require("telescope").setup({
         prompt_prefix = " >",
         color_devicons = true,
 
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-        qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-				
-				layout_config = {
-					vertical = { width = 0.5 } -- TODO
-				},
-
+        layout_strategy = "vertical",
+        layout_config = {
+          vertical = {
+            width = 0.97,
+            height = 0.97,
+            preview_height = 0.5,
+          }
+        },
         mappings = {
             i = {
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<esc>"] = actions.close,
-                ["<C-w>"] = custom_actions.toggle_hidden,
+                ["<C-h>"] = function(prompt_bufnr)
+                  local opts = {
+                    callback = actions.toggle_selection,
+                    loop_callback = actions.send_selected_to_qflist,
+                  }
+                  require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
+                end,
             },
         },
     },
@@ -50,6 +47,29 @@ require("telescope").setup({
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true,
+        },
+        hop = {
+          -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
+          keys = {"a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
+                  "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                  "A", "S", "D", "F", "G", "H", "J", "K", "L", ":",
+                  "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", },
+
+          -- Highlight groups to link to signs and lines; the below configuration refers to demo
+          -- sign_hl typically only defines foreground to possibly be combined with line_hl
+          sign_hl = { "WarningMsg", "Title" },
+
+          -- optional, typically a table of two highlight groups that are alternated between
+          line_hl = { "CursorLine", "Normal" },
+
+          -- options specific to `hop_loop`
+          -- true temporarily disables Telescope selection highlighting
+          clear_selection_hl = false,
+          -- highlight hopped to entry with telescope selection highlight
+          -- note: mutually exclusive with `clear_selection_hl`
+          trace_entry = true,
+          -- jump to entry where hoop loop was started from
+          reset_selection = true,
         },
     }
 })

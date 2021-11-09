@@ -49,7 +49,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-hop.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-live-grep-raw.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'onsails/lspkind-nvim'
 Plug 'phaazon/hop.nvim'
@@ -125,5 +127,5 @@ let g:glow_binary_path = "/usr/local/bin"
 noremap <leader>mm :Glow<CR>
 
 " hop
-lua require'hop'.setup()
+lua require('hop').setup()
 nnoremap s :HopChar1<CR>
