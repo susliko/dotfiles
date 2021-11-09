@@ -1,13 +1,8 @@
 " basics
 let mapleader=" "
-set encoding=utf-8
 set relativenumber
-set number
-filetype plugin on
 syntax on
-set tabstop=2 softtabstop=2
-set shiftwidth=2
-set expandtab
+set tabstop=2 softtabstop=2 shiftwidth=2
 set noswapfile
 set smartcase
 set smartindent
@@ -15,7 +10,6 @@ set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 set scrolloff=8
-set hidden " If hidden is not set, TextEdit might fail.
 set nobackup " Some servers have issues with backup files
 set nowritebackup
 set updatetime=300 " You will have a bad experience with diagnostic messages with the default 4000.
