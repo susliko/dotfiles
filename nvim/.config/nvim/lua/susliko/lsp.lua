@@ -65,8 +65,8 @@ local jsonls_opts = {
   }
 
 M.setup = function()
-	local lsp_installer = require("nvim-lsp-installer")
-	lsp_installer.on_server_ready(function(server)
+  local lsp_installer = require("nvim-lsp-installer")
+  lsp_installer.on_server_ready(function(server)
     local opts = {}
     if server.name == "sumneko_lua" then opts = sumneko_lua_opts end
     if server.name == "jsonls" then opts = jsonls_opts end
