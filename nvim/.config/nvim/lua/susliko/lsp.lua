@@ -2,43 +2,6 @@ local M = {}
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local sumneko_binary_path = vim.fn.exepath('lua-language-server')
-local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-local function setup_sumneko_lua ()
-  require'lspconfig'.sumneko_lua.setup {
-    flags = {
-      debounce_text_changes = 150,
-    },
-    capabilities=capabilities,
-    cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"},
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',  -- Because use for Neovim
-          path = runtime_path, -- Setup your lua path
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  }
-end
-
 local function setup_metals()
   Metals_config = require("metals").bare_config()
 
@@ -63,16 +26,35 @@ local function setup_metals()
   vim.cmd([[augroup end]])
 end
 
-M.setup = function()
-  local lsp_config = require("lspconfig")
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
-  setup_sumneko_lua()
-  setup_metals()
-  lsp_config.dockerls.setup({})
-  lsp_config.html.setup({})
-  lsp_config.cssls.setup({})
-  lsp_config.jdtls.setup({})
-  lsp_config.jsonls.setup({
+local sumneko_lua_opts = {
+  flags = {
+    debounce_text_changes = 150,
+  },
+  capabilities=capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = runtime_path,
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
+local jsonls_opts = {
     commands = {
       Format = {
         function()
@@ -80,9 +62,18 @@ M.setup = function()
         end,
       },
     },
-  })
-  lsp_config.tsserver.setup({})
+  }
 
+M.setup = function()
+	local lsp_installer = require("nvim-lsp-installer")
+	lsp_installer.on_server_ready(function(server)
+    local opts = {}
+    if server.name == "sumneko_lua" then opts = sumneko_lua_opts end
+    if server.name == "jsonls" then opts = jsonls_opts end
+		server:setup(opts)
+	end)
+
+  setup_metals()
   require("lsp_signature").setup({hint_enable = false})
   -- Uncomment for trace logs from neovim
   -- vim.lsp.set_log_level('trace')

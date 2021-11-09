@@ -1,5 +1,6 @@
 " basics
 let mapleader=" "
+set number
 set relativenumber
 syntax on
 set tabstop=2 softtabstop=2 shiftwidth=2
@@ -24,19 +25,18 @@ set hid
 highlight lCursor guifg=NONE guibg=Cyan
 
 call plug#begin('~/.vim/plugged')
-Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'ellisonleao/glow.nvim'
 Plug 'florentc/vim-tla'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'kristijanhusak/orgmode.nvim', { 'branch' : 'tree-sitter' }
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'kristijanhusak/orgmode.nvim' 
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons' 
@@ -50,8 +50,10 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'onsails/lspkind-nvim'
 Plug 'phaazon/hop.nvim'
+Plug '~/programming/public/tla.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'rmagatti/auto-session'
 Plug 'scalameta/nvim-metals'
@@ -64,7 +66,7 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-utils/vim-man'
-Plug '~/programming/public/tla.nvim'
+Plug 'williamboman/nvim-lsp-installer'
 call plug#end()
 
 " Esc remap
