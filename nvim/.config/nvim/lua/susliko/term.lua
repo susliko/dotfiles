@@ -14,7 +14,7 @@ require("toggleterm").setup{
   shell = vim.o.shell, -- change the default shell
 }
 
-function _G.toggle_all_terminals() 
+function _G.toggle_all_terminals()
   local ui = require("toggleterm.ui")
   if not ui.find_open_windows() then
     require("toggleterm").toggle_all('open')
@@ -34,12 +34,12 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
- 
+
 -- toggling
 vim.api.nvim_set_keymap('n', [[<leader-\>]], ':lua toggle_all_terminals()<CR>', {noremap = true})
 
--- lazygit
 local Terminal  = require('toggleterm.terminal').Terminal
+-- lazygit
 local lazygit = Terminal:new({
   hidden= true,
   cmd = "lazygit",
@@ -60,4 +60,26 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
+-- spotify (flixin' and vibin')
+local spotify = Terminal:new({
+  hidden= true,
+  cmd = "spt",
+  dir = "git_dir",
+  direction = "float",
+  float_opts = {
+    border = "curved",
+  },
+  -- function to run on opening the terminal
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+  end,
+  close_on_exit = true
+})
+
+function _spotify_toggle()
+  spotify:toggle()
+end
+
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>sp", "<cmd>lua _spotify_toggle()<CR>", {noremap = true, silent = true})
