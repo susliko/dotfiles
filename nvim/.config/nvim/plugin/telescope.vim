@@ -7,5 +7,6 @@ nnoremap <leader>fq <cmd>Telescope quickfix<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope command_history<cr>
-nnoremap <leader>frc :lua require('susliko.telescope').search_dotfiles()<cr>
+nnoremap <leader>frc <cmd>lua require('susliko.telescope').search_dotfiles()<cr>
+nnoremap <leader>si <cmd>lua require('telescope').extensions.scaladex.scaladex.search()<cr>
 
