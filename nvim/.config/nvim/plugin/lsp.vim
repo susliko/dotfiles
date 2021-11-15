@@ -8,7 +8,7 @@ nnoremap <silent> gr          <cmd>lua require('telescope.builtin').lsp_referenc
 nnoremap <silent> gs          <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
 nnoremap <silent> <leader>fm  <cmd>lua require('telescope').extensions.metals.commands()<CR>
 nnoremap <silent> gws         <cmd>lua require('susliko.telescope').lsp_workspace_symbols()<CR>
-nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action<CR>
+nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>d   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>

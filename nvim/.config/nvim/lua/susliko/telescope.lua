@@ -33,7 +33,10 @@ require("telescope").setup({
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<esc>"] = actions.close,
-                ["<C-h>"] = function(prompt_bufnr)
+								["<C-h>"] = function (prompt_bufnr)
+									R("telescope").extensions.hop._hop(prompt_bufnr, {callback = actions.select_default})
+								end,
+                ["<C-k>"] = function(prompt_bufnr)
                   local opts = {
                     callback = actions.toggle_selection,
                     loop_callback = actions.send_selected_to_qflist,

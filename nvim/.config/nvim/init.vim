@@ -62,10 +62,15 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'vim-utils/vim-man'
 Plug 'williamboman/nvim-lsp-installer'
 call plug#end()
+
+lua << EOF
+require('susliko.globals')
+EOF
+
 
 " Esc remap
 " inoremap jk <Esc>
@@ -108,15 +113,6 @@ au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, o
 
 " no higlight
 nnoremap ,<space> :noh<CR>
-
-
-lua << EOF
-function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
-    print(unpack(objects))
-    return ...
-end
-EOF
 
 " markdown
 let g:glow_binary_path = "/usr/local/bin"
