@@ -3,6 +3,7 @@ let mapleader=" "
 set number
 set relativenumber
 syntax on
+set expandtab
 set tabstop=2 softtabstop=2 shiftwidth=2
 set noswapfile
 set smartcase
@@ -115,9 +116,12 @@ au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, o
 nnoremap ,<space> :noh<CR>
 
 " markdown
-let g:glow_binary_path = "/usr/local/bin"
 noremap <leader>mm :Glow<CR>
 
 " hop
 lua require('hop').setup()
 nnoremap s :HopChar1<CR>
+
+" replacing highlighted text
+vnoremap <F2> "hy:%s/<C-r>h//gc<left><left><left>
+nnoremap <F2> :%s/\<<C-r><C-w>\>/
