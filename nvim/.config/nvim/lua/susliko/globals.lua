@@ -1,6 +1,10 @@
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
-    print(unpack(objects))
+    if ... then
+      local objects = vim.tbl_map(vim.inspect, {...})
+      print(unpack(objects))
+    else
+      print('nil')
+    end
     return ...
 end
 
