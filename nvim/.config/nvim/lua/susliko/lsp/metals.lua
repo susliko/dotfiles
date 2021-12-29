@@ -22,9 +22,19 @@ local function set_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>fm", "<cmd>lua require('telescope').extensions.metals.commands()<CR>", opts)
 end
 
+local function set_autocommands()
+  vim.cmd[[
+    augroup metals_codelens
+    autocmd!
+      autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+    augroup end
+  ]]
+end
+
 Metals_config.on_attach = function(client, bufnr)
   require('susliko.lsp.handlers').on_attach(client, bufnr)
   set_keymaps(bufnr)
+  set_autocommands()
 end
 
 vim.cmd[[
