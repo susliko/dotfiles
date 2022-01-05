@@ -59,6 +59,16 @@ local function lsp_highlight_document(client)
 	end
 end
 
+local function lsp_format_document()
+	vim.cmd([[ 
+    command! Format execute 'lua vim.lsp.buf.formatting()' 
+    augroup lsp_document_format
+      autocmd! * <buffer>
+      autocmd BufWritePre <buffer> Format
+    augroup END
+  ]])
+end
+
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
@@ -83,6 +93,7 @@ end
 local function attach(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
+	lsp_format_document()
 	require("lsp_signature").on_attach({ hint_enable = false }, bufnr)
 end
 
@@ -92,16 +103,6 @@ M.on_attach = function(client, bufnr)
 		local msg = string.format("LSP attach failed: %s", result)
 		vim.notify(msg, vim.log.levels.WARN)
 	end
-end
-
-M.lsp_format_document = function()
-	vim.cmd([[ 
-    command! Format execute 'lua vim.lsp.buf.formatting()' 
-    augroup lsp_document_format
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> Format
-    augroup END
-  ]])
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

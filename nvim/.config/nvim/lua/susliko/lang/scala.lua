@@ -86,7 +86,6 @@ end
 
 local function attach(client, bufnr)
 	require("susliko.lang.lsp.handlers").on_attach(client, bufnr)
-	require("susliko.lang.lsp.handlers").lsp_format_document(client, bufnr)
 	set_keymaps(bufnr)
 	set_autocommands()
 	set_dap(bufnr)

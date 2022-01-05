@@ -8,10 +8,7 @@ end
 
 lsp_installer.on_server_ready(function(server)
 	local opts = {
-		on_attach = function(client, bufnr)
-			require("susliko.lang.lsp.handlers").on_attach(client, bufnr)
-			require("susliko.lang.lsp.handlers").lsp_format_document()
-		end,
+		on_attach = require("susliko.lang.lsp.handlers").on_attach,
 		capabilities = require("susliko.lang.lsp.handlers").capabilities,
 	}
 
@@ -21,7 +18,8 @@ lsp_installer.on_server_ready(function(server)
 	end
 
 	if server.name == "sumneko_lua" then
-		opts = require("susliko.lang.lsp.servers.sumneko")
+      local sumneko_opts = require("susliko.lang.lsp.servers.sumneko")
+		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
 	-- This setup() function is exactly the same as lspconfig's setup function.
