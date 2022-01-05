@@ -11,7 +11,7 @@ local hop = require('susliko.telescope.hop')
 
 require('telescope').setup({
     defaults = {
-        file_ignore_patterns = {'.git/.*'},
+        file_ignore_patterns = {'.git/.*', 'node_modules'},
         path_display = utils.trim_path_vowels,
         file_sorter = sorters.get_fzy_sorter,
         prompt_prefix = ' 🔭 ',
@@ -33,6 +33,16 @@ require('telescope').setup({
 								['<C-j>'] = hop.actions.select
             },
         },
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--hidden' -- grep in hidden files
+        },
     },
     extensions = {
         fzy_native = {
@@ -40,11 +50,14 @@ require('telescope').setup({
             override_file_sorter = true,
         },
         hop = hop.settings,
+        ["ui-select"] = require("telescope.themes").get_dropdown(),
     }
 })
 
 pcall(telescope.load_extension, 'fzy_native')
 pcall(telescope.load_extension, 'scaladex')
+pcall(telescope.load_extension, 'ui-select')
+
 
 local M = {}
 M.search_dotfiles = function()

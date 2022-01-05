@@ -5,9 +5,8 @@ if not lsp_signature_ok then return end
 local telescope_ok, _ = pcall(require, "telescope")
 if not telescope_ok then return end
 
-require'susliko.lsp.handlers'
-require'susliko.lsp.installer'
-require'susliko.lsp.metals'
+require'susliko.lang.lsp.handlers'
+require'susliko.lang.lsp.installer'
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level('trace')

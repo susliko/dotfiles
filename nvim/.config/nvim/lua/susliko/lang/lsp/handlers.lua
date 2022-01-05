@@ -81,19 +81,29 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts)
   keymap(bufnr, "n", "gws", "<cmd>lua require('susliko.telescope.lsp').workspace_symbols()<CR>", opts)
   keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  keymap(bufnr, "n", "<leader>cl", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  keymap(bufnr, "n", "<leader>dl", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
   keymap(bufnr, "n", "[c", "<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>", opts)
   keymap(bufnr, "n", "]c", "<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>", opts)
   keymap(bufnr, "n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border='rounded'})<CR>", opts)
+  keymap(bufnr, "n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
 end
 
-M.on_attach = function(client, bufnr)
+local function attach(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
   lsp_format_document()
   require('lsp_signature').on_attach({hint_enable = false}, bufnr)
+end
+
+M.on_attach = function(client, bufnr)
+  local attach_ok, result = pcall(attach, client, bufnr)
+  if not attach_ok then
+    local msg = string.format('LSP attach failed: %s', result)
+    vim.notify(msg, vim.log.levels.WARN)
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

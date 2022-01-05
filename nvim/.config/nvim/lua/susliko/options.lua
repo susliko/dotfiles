@@ -1,7 +1,7 @@
 local options = {
   backup = false,
   clipboard = "unnamedplus",
-  cmdheight = 2,
+  cmdheight = 1,
   completeopt = { "menuone", "noselect", "noinsert" }, -- mostly just for cmp
   conceallevel = 0,                        -- so that `` is visible in markdown files
   fileencoding = "utf-8",
