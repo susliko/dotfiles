@@ -13,12 +13,12 @@ lsp_installer.on_server_ready(function(server)
 	}
 
 	if server.name == "jsonls" then
-		local jsonls_opts = require("susliko.lang.lsp.servers.jsonls")
-		opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
-	end
+      local jsonls_opts = require("susliko.lang.lsp.servers.jsonls")
+      opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+    end
 
 	if server.name == "sumneko_lua" then
-      local sumneko_opts = require("susliko.lang.lsp.servers.sumneko")
+		local sumneko_opts = require("susliko.lang.lsp.servers.sumneko")
 		opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 	end
 
