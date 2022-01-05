@@ -42,6 +42,7 @@ return packer.startup(function(use)
   use 'ahmedkhalf/project.nvim'
   use 'akinsho/nvim-toggleterm.lua'
   use 'andymass/vim-matchup'
+  use 'ckipp01/stylua-nvim'
   use 'ellisonleao/glow.nvim'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'

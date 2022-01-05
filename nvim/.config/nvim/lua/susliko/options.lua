@@ -7,7 +7,6 @@ local options = {
   fileencoding = "utf-8",
   hlsearch = true,
   ignorecase = true,
-  keymap = "russian-jcukenwin",
   pumheight = 10,                          -- pop up menu height
   showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
   smartcase = true,
