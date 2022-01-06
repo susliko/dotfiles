@@ -69,16 +69,14 @@ local function lsp_document_codelens(client)
 	end
 end
 
-local function lsp_format_document(client)
-	if client.resolved_capabilities.document_formatting then
-		vim.cmd([[ 
-      command! Format execute 'lua vim.lsp.buf.formatting()' 
-      augroup lsp_document_format
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> Format
-      augroup END
-    ]])
-	end
+local function lsp_format_document()
+  vim.cmd([[ 
+    command! Format execute 'lua vim.lsp.buf.formatting()' 
+    augroup lsp_document_format
+      autocmd! * <buffer>
+      autocmd BufWritePre <buffer> Format
+    augroup END
+  ]])
 end
 
 local function lsp_keymaps(bufnr)
@@ -106,7 +104,7 @@ local function attach(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 	lsp_document_codelens(client)
-	lsp_format_document(client)
+	lsp_format_document()
 	require("lsp_signature").on_attach({ hint_enable = false }, bufnr)
 end
 
