@@ -30,14 +30,6 @@ local function set_keymaps(bufnr)
 	keymap(bufnr, "v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]], opts)
 end
 
-local function set_autocommands()
-	vim.cmd([[
-    augroup metals_codelens
-    autocmd!
-      autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-    augroup end
-  ]])
-end
 
 local function set_dap(bufnr)
 	dap.configurations.scala = {
@@ -87,7 +79,6 @@ end
 local function attach(client, bufnr)
 	require("susliko.lang.lsp.handlers").on_attach(client, bufnr)
 	set_keymaps(bufnr)
-	set_autocommands()
 	set_dap(bufnr)
 end
 

@@ -44,7 +44,6 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client)
-	-- Set autocommands conditional on server_capabilities
 	if client.resolved_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
@@ -59,14 +58,27 @@ local function lsp_highlight_document(client)
 	end
 end
 
-local function lsp_format_document()
-	vim.cmd([[ 
-    command! Format execute 'lua vim.lsp.buf.formatting()' 
-    augroup lsp_document_format
+local function lsp_document_codelens(client)
+	if client.resolved_capabilities.code_lens then
+		vim.cmd([[
+      augroup lsp_document_codelens
       autocmd! * <buffer>
-      autocmd BufWritePre <buffer> Format
-    augroup END
-  ]])
+        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+      augroup end
+    ]])
+	end
+end
+
+local function lsp_format_document(client)
+	if client.resolved_capabilities.document_formatting then
+		vim.cmd([[ 
+      command! Format execute 'lua vim.lsp.buf.formatting()' 
+      augroup lsp_document_format
+        autocmd! * <buffer>
+        autocmd BufWritePre <buffer> Format
+      augroup END
+    ]])
+	end
 end
 
 local function lsp_keymaps(bufnr)
@@ -93,7 +105,8 @@ end
 local function attach(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
-	lsp_format_document()
+	lsp_document_codelens(client)
+	lsp_format_document(client)
 	require("lsp_signature").on_attach({ hint_enable = false }, bufnr)
 end
 
