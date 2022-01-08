@@ -41,4 +41,7 @@ keymap("n", ",<space>", "<cmd>noh<CR>", opts)
 
 -- Replace highlighted text
 keymap("v", "<F2>", '"hy:%s/<C-r>h//gc<left><left><left>', opts)
-keymap("n", "<F2>", ':%s/\\<<C-r><C-w>\\>/', opts)
+keymap("n", "<F2>", ":%s/\\<<C-r><C-w>\\>/", opts)
+
+-- Diagnostics
+keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
