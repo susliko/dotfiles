@@ -29,6 +29,15 @@ parser_configs.tlaplus = {
 
 configs.setup({
 	ensure_installed = "all",
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	ignore_install = { "tlaplus" }, -- List of parsers to ignore installing
 	autopairs = {

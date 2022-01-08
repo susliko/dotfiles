@@ -27,9 +27,8 @@ local function set_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>ml", "<cmd>lua require('metals').toggle_logs()<CR>", opts)
 	keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 	keymap(bufnr, "n", "<leader>fm", "<cmd>lua require('telescope').extensions.metals.commands()<CR>", opts)
-	keymap(bufnr, "v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]], opts)
+	keymap(bufnr, "v", "K", "<Esc><cmd>lua require('metals').type_of_range()<CR>", opts)
 end
-
 
 local function set_dap(bufnr)
 	dap.configurations.scala = {
