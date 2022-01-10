@@ -70,7 +70,7 @@ local function lsp_document_codelens(client)
 end
 
 local function lsp_format_document()
-  vim.cmd([[ 
+	vim.cmd([[ 
     command! Format execute 'lua vim.lsp.buf.formatting()' 
     augroup lsp_document_format
       autocmd! * <buffer>
@@ -93,10 +93,9 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>cl", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	keymap(bufnr, "n", "<leader>dl", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-	keymap(bufnr, "n", "[c", "<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>", opts)
-	keymap(bufnr, "n", "]c", "<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>", opts)
-	keymap(bufnr, "n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border='rounded'})<CR>", opts)
+	keymap(bufnr, "n", "<leader>dl", "<cmd>lua vim.diagnostic.set_loclist()<CR>", opts)
+	keymap(bufnr, "n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>", opts)
+	keymap(bufnr, "n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>", opts)
 	keymap(bufnr, "n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
 end
 
