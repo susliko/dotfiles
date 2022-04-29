@@ -1,4 +1,7 @@
 # If you come from bash you might have to change your $PATH.
+if [[ -z "$LC_ALL" ]]; then
+  export LC_ALL='en_US.UTF-8'
+fi
 export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/bin:$HOME/programming/public/lua-language-server/bin/macOS
 
 # Path to your oh-my-zsh installation.

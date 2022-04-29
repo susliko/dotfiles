@@ -10,6 +10,8 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
+vim.g.nvim_tree_respect_buf_cwd = 1
+
 nvim_tree.setup({
 	disable_netrw = true,
 	hijack_netrw = true,

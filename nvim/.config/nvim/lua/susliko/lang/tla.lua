@@ -4,3 +4,7 @@ if not tla_ok then
 end
 
 tla.setup()
+
+vim.api.nvim_set_keymap("n", "<leader>tc", '<cmd>lua require("tla").check()<cr>', {})
+vim.api.nvim_set_keymap("n", "<leader>tr", '<cmd>lua require("tla").translate()<cr>', {})
+
