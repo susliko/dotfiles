@@ -15,4 +15,10 @@ vim.cmd [[
     autocmd!
     autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *.tla if mode() != 'c' | checktime | endif
   augroup end
+  augroup _tex
+    autocmd!
+    autocmd FileType tex set keymap=russian-jcukenwin
+    autocmd FileType tex set iminsert=0
+    autocmd FileType tex set imsearch=-1
+  augroup end
 ]]
