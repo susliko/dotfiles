@@ -113,5 +113,3 @@ alias luamake=/Users/v.morkovkin/programming/public/lua-language-server/3rd/luam
 
 # direnv allows setting directory-wise environmental variables
 eval "$(direnv hook zsh)"
-
-[ -f "/Users/v.morkovkin/.ghcup/env" ] && source "/Users/v.morkovkin/.ghcup/env" # ghcup-env

@@ -1,12 +1,18 @@
+-- sorted by priority
 require("susliko.options")
 require("susliko.keymaps")
 require("susliko.autocommands")
 require("susliko.plugins")
 
+require("susliko.telescope")
+require("susliko.filetree")
+require("susliko.terminal")
+require("susliko.treesitter")
+require("susliko.hop")
+
 require("susliko.autopairs")
 require("susliko.cmp")
 require("susliko.colorscheme")
-require("susliko.filetree")
 require("susliko.git")
 require("susliko.globals")
 require("susliko.harpoon")
