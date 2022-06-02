@@ -16,7 +16,7 @@ require("telescope").setup({
 		file_ignore_patterns = { ".git/.*", "node_modules" },
 		path_display = utils.trim_path_vowels,
 		file_sorter = sorters.get_fzy_sorter,
-		prompt_prefix = " 🔭 ",
+		prompt_prefix = " \u{f46b} ",
 		color_devicons = true,
 		layout_strategy = "vertical",
 		layout_config = {

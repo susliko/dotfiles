@@ -22,7 +22,7 @@ configs.setup({
 		},
 	},
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-	ignore_install = { }, -- List of parsers to ignore installing
+	ignore_install = { "swift" }, -- List of parsers to ignore installing
 	autopairs = {
 		enable = true,
 	},
@@ -31,4 +31,9 @@ configs.setup({
 		disable = {}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
 		additional_vim_regex_highlighting = true,
 	},
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
+  }
 })
