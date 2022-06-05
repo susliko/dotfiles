@@ -52,12 +52,16 @@ exec_always --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:wi
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec alacritty-e 'alsamixer'
+# bindsym $mod+Ctrl+m exec alacritty-e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
+
+# Volume controls
+bindsym XF86AudioRaiseVolume exec "pamixer --allow-boost -i 5; VOLUME=$(pamixer --get-volume); notify-send \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
+bindsym XF86AudioLowerVolume exec "pamixer -d 5; VOLUME=$(pamixer --get-volume); notify-send \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
