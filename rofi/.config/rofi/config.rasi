@@ -1,6 +1,8 @@
 configuration {
+  modi: [ window, run, ssh, drun ];
   modes: [ combi ];
   combi-modes: [ window, drun, run ];
+  dpi: 1;
 }
 
  

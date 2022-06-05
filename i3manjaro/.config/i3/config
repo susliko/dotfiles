@@ -39,7 +39,7 @@ bindsym $mod+q kill
 bindsym $mod+m exec --no-startup-id dmenu_recency
 
 # desctop launcher
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -61,8 +61,8 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 # Volume controls
 bindsym $mod+Ctrl+s exec $script_dir/switch_sink.sh
-bindsym XF86AudioRaiseVolume exec "pamixer --allow-boost -i 5; VOLUME=$(pamixer --get-volume); notify-send \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
-bindsym XF86AudioLowerVolume exec "pamixer -d 5; VOLUME=$(pamixer --get-volume); notify-send \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
+bindsym XF86AudioRaiseVolume exec "pamixer --allow-boost -i 5; VOLUME=$(pamixer --get-volume); notify-send -t 500 \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
+bindsym XF86AudioLowerVolume exec "pamixer -d 5; VOLUME=$(pamixer --get-volume); notify-send -t 500 \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
