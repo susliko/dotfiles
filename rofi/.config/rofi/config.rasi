@@ -1,0 +1,8 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+}
+
+ 
+/* Insert theme modifications after this */
+@theme "/usr/share/rofi/themes/android_notification.rasi"
