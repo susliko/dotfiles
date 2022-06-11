@@ -65,8 +65,8 @@ bindsym XF86AudioRaiseVolume exec "pamixer --allow-boost -i 5; VOLUME=$(pamixer 
 bindsym XF86AudioLowerVolume exec "pamixer -d 5; VOLUME=$(pamixer --get-volume); notify-send -t 500 \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; BRIGHTNESS=$(xbacklight -get); notify-send -t 500 \\"brightness: $BRIGHTNESS\\" -h string:x-canonical-private-synchronous:sound-notification"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; BRIGHTNESS=$(xbacklight -get); notify-send -t 500 \\"brightness: $BRIGHTNESS\\" -h string:x-canonical-private-synchronous:sound-notification"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec alacritty -e 'bmenu'
