@@ -63,6 +63,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+Ctrl+s exec $script_dir/switch_sink.sh
 bindsym XF86AudioRaiseVolume exec "pamixer --allow-boost -i 5; VOLUME=$(pamixer --get-volume); notify-send -t 500 \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
 bindsym XF86AudioLowerVolume exec "pamixer -d 5; VOLUME=$(pamixer --get-volume); notify-send -t 500 \\"volume: $VOLUME\\" -h string:x-canonical-private-synchronous:sound-notification"
+bindsym XF86AudioMute exec "pamixer -t; MUTE=$(pamixer --get-mute); notify-send -t 1000 \\"mute: $MUTE\\" -h string:x-canonical-private-synchronous:sound-notification"
 
 # Screen brightness controls via acpilight (drop-in replacement for xbacklight)
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; BRIGHTNESS=$(xbacklight -get); notify-send -t 500 \\"brightness: $BRIGHTNESS\\" -h string:x-canonical-private-synchronous:sound-notification"
