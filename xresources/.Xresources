@@ -1,4 +1,4 @@
-Xft.dpi:       288
+Xft.dpi:       240
 URxvt.font: xft:FiraMono-Regular:size=13
 Xft.antialias: true
 Xft.hinting:   true

@@ -1,5 +1,5 @@
 local cmp_ok, cmp = pcall(require, "cmp")
-if not cmp_ok then
+if not cmp_ok or cmp == nil then
   return
 end
 local lspkind_ok, lspkind = pcall(require, "lspkind")
@@ -15,6 +15,7 @@ cmp.setup({
     { name = "vsnip" },
     { name = "path", max_item_count = 100 },
     { name = "buffer", keyword_length = 3 },
+    { name = "orgmode" }
   },
   snippet = {
     expand = function(args)
@@ -74,8 +75,8 @@ cmp.setup({
           fallback()
         end
       end
-   }),
- },
+    }),
+  },
 })
 
 cmp.setup.cmdline('/', {
@@ -88,7 +89,7 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources(
-    {{ name = 'path' }},
-    {{ name = 'cmdline' }}
+    { { name = 'path' } },
+    { { name = 'cmdline' } }
   )
 })

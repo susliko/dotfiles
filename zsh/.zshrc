@@ -114,7 +114,11 @@ alias lg=lazygit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export DOTFILES="~/.dotfiles"
 export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+if [ $(command -v direnv) ]; then
+  eval "$(direnv hook zsh)"
+fi
