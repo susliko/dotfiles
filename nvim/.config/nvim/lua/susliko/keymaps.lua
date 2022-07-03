@@ -45,3 +45,6 @@ keymap("n", "<F2>", ":%s/\\<<C-r><C-w>\\>/", opts)
 
 -- Diagnostics
 keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+
+-- Do not change yanked buffer when replacing selected text
+keymap("v", "p", '"_dP', opts)
