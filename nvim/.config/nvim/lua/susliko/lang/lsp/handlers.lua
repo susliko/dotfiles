@@ -43,43 +43,45 @@ M.setup = function()
   })
 end
 
-local function lsp_highlight_document(client)
+local function create_highlight_autocmds(client, bufnr)
   if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]] ,
-      false
-    )
+    local group = vim.api.nvim_create_augroup("LspDocumentHiglight", {})
+    vim.api.nvim_create_autocmd("CursorHold", {
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.document_highlight() end,
+      group = group
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.clear_references() end,
+      group = group
+    })
   end
 end
 
-local function lsp_document_codelens(client)
+local function create_codelens_autocomds(client, bufnr)
   if client.resolved_capabilities.code_lens then
-    vim.cmd([[
-      augroup lsp_document_codelens
-      autocmd! * <buffer>
-        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-      augroup end
-    ]])
+    local group = vim.api.nvim_create_augroup("LspCodelens", { clear = true })
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      buffer = bufnr,
+      callback = function() vim.lsp.codelens.refresh() end,
+      group = group
+    })
   end
 end
 
-local function lsp_format_document()
-  vim.cmd([[ 
-    command! Format execute 'lua vim.lsp.buf.formatting_sync()' 
-    augroup lsp_document_format
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> Format
-    augroup END
-  ]])
+local function create_format_autocmds(client, bufnr)
+  if client.resolved_capabilities.document_formatting then
+    local group = vim.api.nvim_create_augroup("LspCodelens", { clear = true })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.formatting_sync() end,
+      group = group
+    })
+  end
 end
 
-local function lsp_keymaps(bufnr)
+local function create_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
 
@@ -102,12 +104,13 @@ local function lsp_keymaps(bufnr)
 end
 
 local function attach(client, bufnr)
-  lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
-  lsp_document_codelens(client)
-  lsp_format_document()
+  create_keymaps(bufnr)
+  create_highlight_autocmds(client, bufnr)
+  create_codelens_autocomds(client, bufnr)
   require("lsp_signature").on_attach({ hint_enable = false }, bufnr)
 end
+
+M.create_format_autocmds = create_format_autocmds
 
 M.on_attach = function(client, bufnr)
   local attach_ok, result = pcall(attach, client, bufnr)

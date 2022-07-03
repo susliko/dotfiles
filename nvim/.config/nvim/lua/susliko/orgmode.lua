@@ -6,10 +6,9 @@ end
 -- Load custom tree-sitter grammar for org filetype
 orgmode.setup_ts_grammar()
 orgmode.setup({
-  org_agenda_files = { '~/diary/*' },
-  org_default_notes_file = '~/diary/default.org',
+  org_agenda_files = { '~/zettel/**/*' },
+  org_default_notes_file = '~/zettel/default.org',
 })
-
 
 local ts_configs_ok, ts_configs = pcall(require, "nvim-treesitter.configs")
 if not ts_configs_ok then
