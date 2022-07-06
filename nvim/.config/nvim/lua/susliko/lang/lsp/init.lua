@@ -14,6 +14,7 @@ end
 require("susliko.lang.lsp.handlers")
 require("susliko.lang.lsp.configs")
 require("susliko.lang.lsp.null-ls")
+require("susliko.lang.lsp.progress")
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level('trace')
