@@ -10,6 +10,7 @@ require("susliko.telescope.keymaps")
 require("susliko.telescope.lsp")
 local utils = require("susliko.telescope.utils")
 local hop = require("susliko.telescope.hop")
+local custom_pickers = require("susliko.telescope.pickers")
 
 require("telescope").setup({
   defaults = {
@@ -74,6 +75,10 @@ M.search_zettel = function()
     cwd = "~/zettel/",
     hidden = true
   })
+end
+
+M.live_grep_in_folder = function(opts)
+  custom_pickers.live_grep_in_folder(opts)
 end
 
 return M

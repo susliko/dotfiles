@@ -71,14 +71,12 @@ local function create_codelens_autocomds(client, bufnr)
 end
 
 local function create_format_autocmds(client, bufnr)
-  if client.resolved_capabilities.document_formatting then
-    local group = vim.api.nvim_create_augroup("LspCodelens", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function() vim.lsp.buf.formatting_sync() end,
-      group = group
-    })
-  end
+  local group = vim.api.nvim_create_augroup("LspFormat", { clear = true })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = bufnr,
+    callback = function() vim.lsp.buf.formatting_sync() end,
+    group = group
+  })
 end
 
 local function create_keymaps(bufnr)
@@ -101,6 +99,7 @@ local function create_keymaps(bufnr)
   keymap(bufnr, "n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>", opts)
   keymap(bufnr, "n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>", opts)
   keymap(bufnr, "n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
+  keymap(bufnr, "n", "lf", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
 end
 
 local function attach(client, bufnr)
